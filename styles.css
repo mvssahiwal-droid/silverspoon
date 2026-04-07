@@ -113,6 +113,7 @@ h4 {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
+    white-space: nowrap; /* Prevent wrapping */
 }
 
 .brand-logo:hover {
@@ -387,7 +388,6 @@ h4 {
     overflow: hidden;
     height: 300px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-    group: menu_card;
 }
 
 .menu-teaser-img {
@@ -657,8 +657,30 @@ h4 {
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        padding: 0.8rem 1rem;
+    }
+
+    .brand-logo {
+        height: 45px; /* Reduced from 70px */
+    }
+
+    .brand-text {
+        font-size: 1.4rem; /* Reduced from 2.2rem */
+    }
+
+    .hero-section {
+        height: auto;
+        min-height: 80vh;
+        padding-top: 100px; /* Offset for fixed navbar */
+    }
+
+    .hero-content {
+        padding: 4rem 1.5rem;
+    }
+
     .hero-title {
-        font-size: 3rem;
+        font-size: 2.8rem;
     }
 
     .mobile-menu-btn {
@@ -692,13 +714,14 @@ h4 {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 65px;
-    height: 65px;
+    height: 60px;
+    padding: 0 1.5rem;
     background: var(--accent-gold);
-    border-radius: 50%;
+    border-radius: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 15px;
     cursor: pointer;
     z-index: 1001;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 0 5px rgba(252, 213, 92, 0.1);
@@ -712,13 +735,20 @@ h4 {
 }
 
 .cart-icon {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+}
+
+.cart-total-float {
+    font-weight: 800;
+    color: #000;
+    font-size: 1.1rem;
+    font-family: 'Outfit', sans-serif;
 }
 
 .cart-count {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: -8px;
+    left: -8px;
     background: #ff0040;
     color: #fff;
     width: 26px;
@@ -746,8 +776,10 @@ h4 {
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    padding: 2rem 2rem 4rem; /* More padding at bottom */
     border-left: 1px solid rgba(255, 255, 255, 0.1);
+    max-height: 100vh;
+    overflow-y: auto; /* Allow sidebar scrolling if contents are too tall */
 }
 
 .cart-sidebar.active {
@@ -761,6 +793,7 @@ h4 {
     margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .cart-header h3 {
@@ -784,10 +817,11 @@ h4 {
 }
 
 .cart-items {
-    flex-grow: 1;
+    flex: 1 1 200px; /* Grow to fill space, shrink to 200px minimum if needed */
     overflow-y: auto;
     margin-bottom: 2rem;
     padding-right: 10px;
+    min-height: 200px; /* Ensure there's space for dishes */
 }
 
 .cart-items::-webkit-scrollbar {
@@ -857,8 +891,10 @@ h4 {
 }
 
 .cart-footer {
-    padding-top: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1rem; /* Extra space below the button */
     border-top: 1px solid rgba(255, 215, 0, 0.2);
+    flex-shrink: 0;
 }
 
 .cart-total {

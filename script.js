@@ -74,6 +74,7 @@ const cartSidebar = document.getElementById('cart-sidebar');
 const closeCartBtn = document.getElementById('close-cart');
 const cartItemsContainer = document.getElementById('cart-items');
 const cartCount = document.getElementById('cart-count');
+const cartTotalFloat = document.getElementById('cart-total-float');
 const cartTotalPrice = document.getElementById('cart-total-price');
 const whatsappOrderBtn = document.getElementById('whatsapp-order-btn');
 
@@ -124,7 +125,10 @@ function updateCart() {
     
     // Update total price
     const totalSum = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartTotalPrice.innerText = `€ ${totalSum.toFixed(2).replace('.', ',')}`;
+    const formattedPrice = `€ ${totalSum.toFixed(2).replace('.', ',')}`;
+    
+    cartTotalPrice.innerText = formattedPrice;
+    if (cartTotalFloat) cartTotalFloat.innerText = formattedPrice;
 }
 
 // 4. Render Cart Items
