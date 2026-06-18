@@ -9,6 +9,14 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// Discount Banner Close
+const closeBanner = document.getElementById('closeBanner');
+if (closeBanner) {
+    closeBanner.addEventListener('click', () => {
+        document.body.classList.add('banner-hidden');
+    });
+}
+
 // Mobile Mobile Toggle
 const mobileBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
@@ -123,12 +131,19 @@ function updateCart() {
     // Render list
     renderCartItems();
     
-    // Update total price
-    const totalSum = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const formattedPrice = `€ ${totalSum.toFixed(2).replace('.', ',')}`;
+    // Update total price with 10% Discount
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const discount = subtotal * 0.10;
+    const finalTotal = subtotal - discount;
     
-    cartTotalPrice.innerText = formattedPrice;
-    if (cartTotalFloat) cartTotalFloat.innerText = formattedPrice;
+    const formattedSubtotal = `€ ${subtotal.toFixed(2).replace('.', ',')}`;
+    const formattedDiscount = `- € ${discount.toFixed(2).replace('.', ',')}`;
+    const formattedTotal = `€ ${finalTotal.toFixed(2).replace('.', ',')}`;
+    
+    document.getElementById('cart-subtotal').innerText = formattedSubtotal;
+    document.getElementById('cart-discount').innerText = formattedDiscount;
+    cartTotalPrice.innerText = formattedTotal;
+    if (cartTotalFloat) cartTotalFloat.innerText = formattedTotal;
 }
 
 // 4. Render Cart Items
@@ -186,11 +201,13 @@ whatsappOrderBtn.onclick = function() {
         return;
     }
 
-    const totalSum = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const discount = subtotal * 0.10;
+    const finalTotal = subtotal - discount;
     
-    // Minimum Order Check for Delivery
-    if (totalSum < 30) {
-        const confirmResult = confirm(`Der Mindestbestellwert für die Zustellung beträgt € 30,-. Ihr aktueller Betrag ist € ${totalSum.toFixed(2).replace('.', ',')}.\n\nMöchten Sie trotzdem fortfahren (nur zur Abholung)?`);
+    // Minimum Order Check for Delivery (Checking subtotal before discount)
+    if (subtotal < 30) {
+        const confirmResult = confirm(`Der Mindestbestellwert für die Zustellung beträgt € 30,-. Ihr aktueller Betrag ist € ${subtotal.toFixed(2).replace('.', ',')}.\n\nMöchten Sie trotzdem fortfahren (nur zur Abholung)?`);
         if (!confirmResult) return;
     }
 
@@ -202,7 +219,10 @@ whatsappOrderBtn.onclick = function() {
     });
     
     message += "--------------------------\n";
-    message += `*Total: € ${totalSum.toFixed(2).replace('.', ',')}*\n\n`;
+    message += `Subtotal Items: € ${subtotal.toFixed(2).replace('.', ',')}\n`;
+    message += `Summer Sale Discount (10%): - € ${discount.toFixed(2).replace('.', ',')}\n`;
+    message += `*Final Payable Amount: € ${finalTotal.toFixed(2).replace('.', ',')}*\n`;
+    message += "--------------------------\n\n";
     
     message += "*Customer Details:*\n";
     message += `👤 Name: ${name}\n`;
@@ -212,6 +232,10 @@ whatsappOrderBtn.onclick = function() {
     } else {
         message += `📍 Pickup (Abholung)\n`;
     }
+    
+    message += "\n*Payment Information:*\n";
+    message += "Bank: Mohammad Azam (Silver Spoon)\n";
+    message += "IBAN: AT31 1500 0042 1113 4467\n";
     
     message += "\nPlease confirm my order. Thank you!";
 

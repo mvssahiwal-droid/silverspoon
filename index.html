@@ -18,6 +18,16 @@
 </head>
 
 <body>
+    <!-- Discount Announcement Bar -->
+    <div class="discount-banner">
+        <div class="banner-content">
+            <span class="banner-icon">🎁</span>
+            <span class="banner-text"><strong>SPECIAL OFFER:</strong> 10% Discount on All Orders! Valid until 31st
+                August.</span>
+            <span class="banner-close" id="closeBanner">&times;</span>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <header class="navbar">
         <div class="logo-container">
@@ -44,6 +54,11 @@
     <section id="home" class="hero-section">
         <div class="hero-overlay"></div>
         <div class="hero-content">
+            <div class="discount-badge">
+                <span class="badge-top">Special Summer Offer</span>
+                <span class="badge-value">10% OFF</span>
+                <span class="badge-date">Until Aug 31</span>
+            </div>
             <span class="hero-top-text">AUTHENTIC PAKISTANI & INDIAN FOOD IN VIENNA</span>
             <h1 class="hero-title">Silver Spoon <br> Restaurant</h1>
             <p class="hero-subtitle">Experience the rich flavors of South Asia in the heart of Vienna.<br>100% Halal
@@ -990,6 +1005,17 @@
                                 target="_blank">www.silverspoon.at</a></div>
                     </div>
 
+                    <!-- Bank Details -->
+                    <div class="contact-row"
+                        style="margin-top: 1rem; border-top: 1px solid rgba(252, 213, 92, 0.2); padding-top: 1rem;">
+                        <div class="contact-icon">💳</div>
+                        <div class="contact-label">Bank:</div>
+                        <div class="contact-value" style="font-size: 0.85rem; line-height: 1.4;">
+                            Mohammad Azam<br>
+                            <span style="color: var(--accent-gold);">AT31 1500 0042 1113 4467</span>
+                        </div>
+                    </div>
+
                     <!-- Google -->
                     <div class="contact-row">
                         <div class="contact-icon">📍</div>
@@ -1059,9 +1085,44 @@
                 style="font-size: 0.85rem; color: #ff0040; margin-bottom: 1rem; text-align: center; font-weight: 600;">
                 🚚 Zustellung bis 5km | Mindestbestellwert € 30,-
             </div>
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="cart-total-price">€ 0,00</span>
+
+            <div class="cart-details" style="margin-bottom: 1rem; padding: 0.5rem 0;">
+                <div
+                    style="display: flex; justify-content: space-between; opacity: 0.8; font-size: 0.9rem; margin-bottom: 0.3rem;">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal">€ 0,00</span>
+                </div>
+                <div
+                    style="display: flex; justify-content: space-between; color: var(--accent-gold); font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 600;">
+                    <span>Special Discount (10%):</span>
+                    <span id="cart-discount">- € 0,00</span>
+                </div>
+            </div>
+
+            <div class="bank-details"
+                style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border: 1px dashed rgba(252, 213, 92, 0.3);">
+                <h5
+                    style="color: var(--accent-gold); margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+                    Bank Account Details:</h5>
+                <p style="font-size: 0.85rem; color: #fff; margin-bottom: 0.2rem;"><strong>Name:</strong> Mohammad Azam
+                    (Silver Spoon)</p>
+                <p style="font-size: 0.85rem; color: #fff;"><strong>IBAN:</strong> <span
+                        style="letter-spacing: 1px;">AT31 1500 0042 1113 4467</span></p>
+            </div>
+
+            <div class="cart-total"
+                style="background: rgba(252, 213, 92, 0.1); padding: 1.2rem; border-radius: 12px; margin-top: 1.5rem; border: 1.5px solid var(--accent-gold);">
+                <div style="display: flex; flex-direction: column; width: 100%;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 1.2rem; font-weight: 800;">Total Payable:</span>
+                        <span id="cart-total-price"
+                            style="font-size: 1.6rem; color: var(--accent-gold); font-weight: 900;">€ 0,00</span>
+                    </div>
+                    <p
+                        style="font-size: 0.75rem; color: var(--accent-gold); margin-top: 0.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                        (After 10% Summer Discount)
+                    </p>
+                </div>
             </div>
             <button id="whatsapp-order-btn" class="btn btn-yellow whatsapp-btn">
                 <span class="btn-text">Order via WhatsApp</span>
